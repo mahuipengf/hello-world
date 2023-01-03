@@ -21,7 +21,6 @@ steps:
   - run: echo '如果前面的步骤失败了，可以通过内置函数 failure() 来继续执行'
   - name: 钉钉成功通知
     plugin: "@serverless-cd/ding-talk"
-    if: ${{ success() }}
     inputs:
       webhook: https://oapi.dingtalk.com/robot/send?access_token=${{secrets.DING_TALK_TOKEN}}
       msgtype: markdown
@@ -37,4 +36,3 @@ steps:
           **提交人**: ${{ git.pusher.name }}
           **commit id**: ${{ git.commit }}
           **commit message**: ${{ git.message }}
-    if: ${{ failure() }}
